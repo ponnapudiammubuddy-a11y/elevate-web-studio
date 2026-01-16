@@ -1,10 +1,7 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const HeroSection = () => {
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section
       id="home"
@@ -44,19 +41,19 @@ export const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-600">
-            <button
-              onClick={() => scrollToSection('portfolio')}
+            <Link
+              to="/portfolio"
               className="btn-gradient flex items-center gap-2 group"
             >
               View My Work
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
+            </Link>
+            <Link
+              to="/contact"
               className="btn-outline-gradient flex items-center gap-2"
             >
               Get Your Website
-            </button>
+            </Link>
           </div>
 
           {/* Stats */}
