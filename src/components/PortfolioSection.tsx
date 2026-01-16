@@ -1,48 +1,55 @@
 import { useState } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 
+import portfolioEcommerce from '@/assets/portfolio-ecommerce.jpg';
+import portfolioCorporate from '@/assets/portfolio-corporate.jpg';
+import portfolioSaas from '@/assets/portfolio-saas.jpg';
+import portfolioRestaurant from '@/assets/portfolio-restaurant.jpg';
+import portfolioCreative from '@/assets/portfolio-creative.jpg';
+import portfolioRealestate from '@/assets/portfolio-realestate.jpg';
+
 const projects = [
   {
     id: 1,
     title: 'E-Commerce Platform',
     category: 'E-Commerce',
     description: 'A modern e-commerce platform with seamless checkout and inventory management.',
-    color: 'from-primary to-secondary',
+    image: portfolioEcommerce,
   },
   {
     id: 2,
     title: 'Corporate Website',
     category: 'Business',
     description: 'Professional corporate website with clean design and optimized performance.',
-    color: 'from-secondary to-accent',
+    image: portfolioCorporate,
   },
   {
     id: 3,
     title: 'SaaS Dashboard',
     category: 'Web App',
     description: 'Intuitive SaaS dashboard with real-time analytics and user management.',
-    color: 'from-accent to-primary',
+    image: portfolioSaas,
   },
   {
     id: 4,
     title: 'Restaurant Website',
     category: 'Business',
     description: 'Elegant restaurant website with online ordering and reservation system.',
-    color: 'from-primary via-secondary to-accent',
+    image: portfolioRestaurant,
   },
   {
     id: 5,
     title: 'Portfolio Website',
     category: 'Personal',
     description: 'Creative portfolio showcasing work with stunning animations.',
-    color: 'from-secondary via-accent to-primary',
+    image: portfolioCreative,
   },
   {
     id: 6,
     title: 'Real Estate Platform',
     category: 'Business',
     description: 'Property listing platform with advanced search and virtual tours.',
-    color: 'from-accent via-primary to-secondary',
+    image: portfolioRealestate,
   },
 ];
 
@@ -75,28 +82,29 @@ export const PortfolioSection = () => {
               onClick={() => setSelectedProject(project)}
               className="group cursor-pointer relative aspect-[4/3] rounded-2xl overflow-hidden gradient-border"
             >
-              {/* Gradient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-80 group-hover:opacity-100 transition-opacity`} />
+              {/* Project Image */}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
               
-              {/* Pattern Overlay */}
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBtLTEgMGExIDEgMCAxIDAgMiAwYTEgMSAwIDEgMCAtMiAwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48L2c+PC9zdmc+')] opacity-50" />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
               {/* Content */}
               <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <span className="text-xs font-medium text-white/80 uppercase tracking-wider mb-2">
+                <span className="text-xs font-medium text-primary uppercase tracking-wider mb-2">
                   {project.category}
                 </span>
-                <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:translate-y-0 translate-y-2 transition-transform">
+                <h3 className="font-display text-xl font-bold text-foreground mb-2 group-hover:translate-y-0 translate-y-2 transition-transform">
                   {project.title}
                 </h3>
                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-sm text-white/80">View Project</span>
-                  <ExternalLink className="w-4 h-4 text-white/80" />
+                  <span className="text-sm text-muted-foreground">View Project</span>
+                  <ExternalLink className="w-4 h-4 text-primary" />
                 </div>
               </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           ))}
         </div>
@@ -126,16 +134,13 @@ export const PortfolioSection = () => {
 
             <div className="gradient-border rounded-3xl overflow-hidden">
               {/* Project Image */}
-              <div className={`aspect-video bg-gradient-to-br ${selectedProject.color} relative`}>
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBtLTEgMGExIDEgMCAxIDAgMiAwYTEgMSAwIDEgMCAtMiAwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48L2c+PC9zdmc+')] opacity-30" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <span className="font-display font-bold text-3xl">{selectedProject.title.charAt(0)}</span>
-                    </div>
-                    <h3 className="font-display text-2xl font-bold">{selectedProject.title}</h3>
-                  </div>
-                </div>
+              <div className="aspect-video relative overflow-hidden">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
               </div>
 
               {/* Project Details */}
