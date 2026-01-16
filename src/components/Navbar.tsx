@@ -1,50 +1,32 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Offers', href: '#offers' },
-  { name: 'Portfolio', href: '#portfolio' },
-  { name: 'Process', href: '#process' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.slice(1));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  useEffect(() => {
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(href.slice(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  }, [location]);
 
   return (
     <nav
@@ -56,41 +38,39 @@ export const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 group" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}>
+        <Link to="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center font-display font-bold text-white text-lg">
             T
           </div>
           <span className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors">
             THAHASEEN<span className="gradient-text"> WEB</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
-              onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+              to={item.href}
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 relative ${
-                activeSection === item.href.slice(1)
+                location.pathname === item.href
                   ? 'text-primary nav-link-active'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               }`}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
         {/* CTA Button */}
-        <a
-          href="#contact"
-          onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+        <Link
+          to="/contact"
           className="hidden lg:block btn-gradient text-sm py-2.5 px-6"
         >
           Get Started
-        </a>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -109,26 +89,24 @@ export const Navbar = () => {
       >
         <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
-              onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+              to={item.href}
               className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
-                activeSection === item.href.slice(1)
+                location.pathname === item.href
                   ? 'text-primary bg-primary/10'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               }`}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+          <Link
+            to="/contact"
             className="btn-gradient text-center mt-2"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
