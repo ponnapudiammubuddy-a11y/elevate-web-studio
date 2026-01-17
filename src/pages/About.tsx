@@ -9,8 +9,8 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-24">
-        <AboutSection />
         <ProcessSection />
+        <AboutSection />
         <OffersSection />
       </div>
       <Footer />
