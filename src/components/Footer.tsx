@@ -1,7 +1,8 @@
+import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 
-export const Footer = () => {
+export const Footer = forwardRef<HTMLElement>((_, ref) => {
   const currentYear = new Date().getFullYear();
 
   const navLinks = [
@@ -29,7 +30,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden">
+    <footer ref={ref} className="relative overflow-hidden">
       {/* Dark gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-[#0a0a1a] to-[#050510]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
@@ -146,4 +147,6 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
