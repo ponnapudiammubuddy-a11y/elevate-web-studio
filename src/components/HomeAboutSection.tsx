@@ -1,4 +1,5 @@
 import { Sparkles, Zap, Users, MessageCircle, CheckCircle } from 'lucide-react';
+import heroMockup from '@/assets/hero-mockup.png';
 
 const features = [
   {
@@ -21,12 +22,6 @@ const features = [
     title: "Full Doubt-Solving",
     description: "Every question answered, every concern addressed"
   }
-];
-
-const stats = [
-  { label: "Client Satisfaction", value: 100 },
-  { label: "On-Time Delivery", value: 98 },
-  { label: "Project Success", value: 100 }
 ];
 
 export const HomeAboutSection = () => {
@@ -88,41 +83,18 @@ export const HomeAboutSection = () => {
             </div>
           </div>
           
-          {/* Right - Stats Card */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-slate-900/80 to-slate-800/50 border border-white/10 backdrop-blur-xl">
-              {/* Gradient glow effect */}
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-primary/20 via-purple-500/20 to-cyan-500/20 blur-sm -z-10" />
+          {/* Right - Device Mockup */}
+          <div className="animate-fade-in flex items-center justify-center" style={{ animationDelay: '0.3s' }}>
+            <div className="relative">
+              {/* Glow effect behind image */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-purple-500/30 to-cyan-500/30 blur-3xl scale-110" />
               
-              {/* Logo/Avatar */}
-              <div className="flex flex-col items-center mb-8">
-                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary via-purple-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg shadow-primary/20">
-                  <span className="text-4xl font-bold text-white">T</span>
-                </div>
-                <h3 className="text-2xl font-bold text-foreground">THAHASEEN WEB</h3>
-                <p className="text-muted-foreground">Web Design & Development</p>
-              </div>
-              
-              {/* Stats with progress bars */}
-              <div className="space-y-5">
-                {stats.map((stat, index) => (
-                  <div key={stat.label} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">{stat.label}</span>
-                      <span className="text-sm font-semibold text-cyan-400">{stat.value}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-slate-700/50 overflow-hidden">
-                      <div 
-                        className="h-full rounded-full bg-gradient-to-r from-primary via-purple-500 to-cyan-500 transition-all duration-1000 ease-out"
-                        style={{ 
-                          width: `${stat.value}%`,
-                          animationDelay: `${0.5 + index * 0.2}s`
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {/* Mockup image */}
+              <img 
+                src={heroMockup} 
+                alt="Website mockup preview" 
+                className="relative z-10 w-full max-w-lg rounded-2xl shadow-2xl shadow-primary/20"
+              />
             </div>
           </div>
         </div>
