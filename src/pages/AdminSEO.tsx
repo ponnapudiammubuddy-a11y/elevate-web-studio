@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
 import { useAllSEOSettings, useUpdateSEOSettings, useGlobalSEOSettings, useUpdateGlobalSEOSettings, useSitemapEntries, type SEOSettings, type GlobalSEOSettings } from '@/hooks/useSEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,9 +14,7 @@ import {
   Globe, 
   FileText, 
   Settings, 
-  LogOut, 
   Save,
-  Eye,
   AlertCircle,
   CheckCircle,
   Map,
@@ -26,7 +22,6 @@ import {
 } from 'lucide-react';
 
 const AdminSEO = () => {
-  const navigate = useNavigate();
   const [selectedPage, setSelectedPage] = useState<string | null>(null);
   const [editedSettings, setEditedSettings] = useState<Partial<SEOSettings>>({});
   const [editedGlobalSettings, setEditedGlobalSettings] = useState<Partial<GlobalSEOSettings>>({});
@@ -38,25 +33,10 @@ const AdminSEO = () => {
   const updateGlobal = useUpdateGlobalSEOSettings();
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate('/admin/login');
-      }
-    };
-    checkAuth();
-  }, [navigate]);
-
-  useEffect(() => {
     if (globalSettings) {
       setEditedGlobalSettings(globalSettings);
     }
   }, [globalSettings]);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/admin/login');
-  };
 
   const handleSavePageSEO = async () => {
     if (!selectedPage || !editedSettings.id) return;
@@ -112,62 +92,41 @@ const AdminSEO = () => {
 
   if (loadingSEO || loadingGlobal) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="absolute inset-0 gradient-bg-animated opacity-10 pointer-events-none" />
-      
-      {/* Header */}
-      <header className="sticky top-0 z-50 glass-card border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">
-              <Search className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold">SEO Admin Panel</h1>
-              <p className="text-sm text-muted-foreground">Manage your website's SEO</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={() => navigate('/')} className="gap-2">
-              <Eye className="w-4 h-4" />
-              View Site
-            </Button>
-            <Button variant="ghost" onClick={handleLogout} className="gap-2">
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
-          </div>
-        </div>
-      </header>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold flex items-center gap-2">
+          <Search className="w-8 h-8" />
+          SEO Settings
+        </h1>
+        <p className="text-muted-foreground">Manage your website's SEO</p>
+      </div>
 
-      <main className="container mx-auto px-4 py-8 relative z-10">
-        <Tabs defaultValue="pages" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 max-w-2xl">
-            <TabsTrigger value="pages" className="gap-2">
-              <FileText className="w-4 h-4" />
-              Pages
-            </TabsTrigger>
-            <TabsTrigger value="global" className="gap-2">
-              <Globe className="w-4 h-4" />
-              Global
-            </TabsTrigger>
-            <TabsTrigger value="sitemap" className="gap-2">
-              <Map className="w-4 h-4" />
-              Sitemap
-            </TabsTrigger>
-            <TabsTrigger value="technical" className="gap-2">
-              <Code className="w-4 h-4" />
-              Technical
-            </TabsTrigger>
-          </TabsList>
+      <Tabs defaultValue="pages" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-4 max-w-2xl">
+          <TabsTrigger value="pages" className="gap-2">
+            <FileText className="w-4 h-4" />
+            Pages
+          </TabsTrigger>
+          <TabsTrigger value="global" className="gap-2">
+            <Globe className="w-4 h-4" />
+            Global
+          </TabsTrigger>
+          <TabsTrigger value="sitemap" className="gap-2">
+            <Map className="w-4 h-4" />
+            Sitemap
+          </TabsTrigger>
+          <TabsTrigger value="technical" className="gap-2">
+            <Code className="w-4 h-4" />
+            Technical
+          </TabsTrigger>
+        </TabsList>
 
           {/* Page SEO Tab */}
           <TabsContent value="pages" className="space-y-6">
@@ -603,7 +562,6 @@ const AdminSEO = () => {
             </div>
           </TabsContent>
         </Tabs>
-      </main>
     </div>
   );
 };
