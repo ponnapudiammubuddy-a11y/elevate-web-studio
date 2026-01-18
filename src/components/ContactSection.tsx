@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Send, Mail, MessageCircle } from 'lucide-react';
+import { Send, Mail, MessageCircle, Phone } from 'lucide-react';
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -60,6 +60,15 @@ export const ContactSection = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">Email us at</p>
                     <p className="font-semibold">thahaseen.s@semixon.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
+                  <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Call us at</p>
+                    <a href="tel:+917995983560" className="font-semibold hover:text-primary transition-colors">+91 79959 83560</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
