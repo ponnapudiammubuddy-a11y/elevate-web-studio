@@ -8,9 +8,29 @@ import {
   TrendingUp,
   Clock,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Users,
+  Activity,
+  BarChart3
 } from 'lucide-react';
-import { format } from 'date-fns';
+import { format, subDays, startOfDay, eachDayOfInterval } from 'date-fns';
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts';
+import { useMemo } from 'react';
+
+const COLORS = ['hsl(var(--primary))', 'hsl(var(--destructive))', 'hsl(var(--muted))'];
 
 const AdminDashboard = () => {
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
@@ -19,6 +39,56 @@ const AdminDashboard = () => {
 
   const recentInquiries = inquiries?.slice(0, 5) || [];
   const recentActivities = activities?.slice(0, 5) || [];
+
+  // Calculate inquiry trends for the last 7 days
+  const inquiryTrendData = useMemo(() => {
+    if (!inquiries) return [];
+    
+    const last7Days = eachDayOfInterval({
+      start: subDays(new Date(), 6),
+      end: new Date(),
+    });
+
+    return last7Days.map(day => {
+      const dayStart = startOfDay(day);
+      const dayEnd = new Date(dayStart);
+      dayEnd.setDate(dayEnd.getDate() + 1);
+      
+      const count = inquiries.filter(inquiry => {
+        const inquiryDate = new Date(inquiry.created_at);
+        return inquiryDate >= dayStart && inquiryDate < dayEnd;
+      }).length;
+
+      return {
+        date: format(day, 'MMM d'),
+        inquiries: count,
+      };
+    });
+  }, [inquiries]);
+
+  // Calculate activity by type
+  const activityByType = useMemo(() => {
+    if (!activities) return [];
+    
+    const typeCounts: Record<string, number> = {};
+    activities.forEach(activity => {
+      const type = activity.entity_type;
+      typeCounts[type] = (typeCounts[type] || 0) + 1;
+    });
+
+    return Object.entries(typeCounts)
+      .map(([name, value]) => ({ name, value }))
+      .slice(0, 5);
+  }, [activities]);
+
+  // Read vs Unread inquiries for pie chart
+  const inquiryStatusData = useMemo(() => {
+    if (!stats) return [];
+    return [
+      { name: 'Read', value: (stats.totalInquiries || 0) - (stats.unreadInquiries || 0) },
+      { name: 'Unread', value: stats.unreadInquiries || 0 },
+    ];
+  }, [stats]);
 
   if (statsLoading) {
     return (
@@ -89,6 +159,149 @@ const AdminDashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Charts Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Inquiry Trends Chart */}
+        <Card className="glass-card lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5" />
+              Inquiry Trends
+            </CardTitle>
+            <CardDescription>Last 7 days inquiry activity</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[250px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={inquiryTrendData}>
+                  <defs>
+                    <linearGradient id="inquiryGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis 
+                    dataKey="date" 
+                    stroke="hsl(var(--muted-foreground))" 
+                    fontSize={12}
+                  />
+                  <YAxis 
+                    stroke="hsl(var(--muted-foreground))" 
+                    fontSize={12}
+                    allowDecimals={false}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))', 
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px',
+                    }}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="inquiries"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth={2}
+                    fill="url(#inquiryGradient)"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Inquiry Status Pie Chart */}
+        <Card className="glass-card">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Activity className="w-5 h-5" />
+              Inquiry Status
+            </CardTitle>
+            <CardDescription>Read vs Unread</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[250px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={inquiryStatusData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {inquiryStatusData.map((_, index) => (
+                      <Cell 
+                        key={`cell-${index}`} 
+                        fill={index === 0 ? 'hsl(var(--primary))' : 'hsl(var(--destructive))'} 
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))', 
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px',
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="flex justify-center gap-4 -mt-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-primary" />
+                  <span className="text-sm text-muted-foreground">Read</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-destructive" />
+                  <span className="text-sm text-muted-foreground">Unread</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Activity by Type Chart */}
+      {activityByType.length > 0 && (
+        <Card className="glass-card">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Activity by Type
+            </CardTitle>
+            <CardDescription>Distribution of recent activities</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={activityByType} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis type="number" stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                  <YAxis 
+                    dataKey="name" 
+                    type="category" 
+                    stroke="hsl(var(--muted-foreground))" 
+                    fontSize={12}
+                    width={100}
+                  />
+                  <Tooltip
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))', 
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px',
+                    }}
+                  />
+                  <Bar dataKey="value" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
