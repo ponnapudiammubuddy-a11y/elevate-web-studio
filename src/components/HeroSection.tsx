@@ -56,13 +56,7 @@ export const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 animate-fade-in-up">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-muted-foreground">
-              Web Design & Development
-            </span>
-          </div>
-
+          
           {/* Main Heading */}
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up animation-delay-200">
             Premium Web Design &{' '}
