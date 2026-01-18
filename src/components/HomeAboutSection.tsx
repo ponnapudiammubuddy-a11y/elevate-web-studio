@@ -1,5 +1,5 @@
 import { Sparkles, Zap, Users, MessageCircle, CheckCircle } from 'lucide-react';
-import heroMockup from '@/assets/hero-mockup.png';
+import statsCard from '@/assets/stats-card.png';
 
 const features = [
   {
@@ -83,18 +83,27 @@ export const HomeAboutSection = () => {
             </div>
           </div>
           
-          {/* Right - Device Mockup */}
-          <div className="animate-fade-in flex items-center justify-center" style={{ animationDelay: '0.3s' }}>
-            <div className="relative">
-              {/* Glow effect behind image */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-purple-500/30 to-cyan-500/30 blur-3xl scale-110" />
+          {/* Right - Stats Card */}
+          <div className="flex items-center justify-center" style={{ animationDelay: '0.3s' }}>
+            <div className="relative group">
+              {/* Animated glow effect behind image */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-purple-500/40 to-cyan-500/40 blur-3xl scale-110 animate-glow-pulse" />
               
-              {/* Mockup image */}
+              {/* Floating particles */}
+              <div className="absolute -top-4 -right-4 w-3 h-3 bg-primary/60 rounded-full animate-float-gentle" style={{ animationDelay: '0s' }} />
+              <div className="absolute top-1/4 -left-6 w-2 h-2 bg-cyan-400/60 rounded-full animate-float-gentle" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-1/4 -right-8 w-4 h-4 bg-purple-400/50 rounded-full animate-float-gentle" style={{ animationDelay: '2s' }} />
+              <div className="absolute -bottom-6 left-1/4 w-2 h-2 bg-primary/50 rounded-full animate-float-gentle" style={{ animationDelay: '1.5s' }} />
+              
+              {/* Stats card image with animations */}
               <img 
-                src={heroMockup} 
-                alt="Website mockup preview" 
-                className="relative z-10 w-full max-w-lg rounded-2xl shadow-2xl shadow-primary/20"
+                src={statsCard} 
+                alt="THAHASEEN WEB Stats - 100% Client Satisfaction, 98% On-Time Delivery, 100% Project Success" 
+                className="relative z-10 w-full max-w-md rounded-2xl shadow-2xl shadow-primary/30 animate-morph-in transition-transform duration-500 group-hover:scale-[1.02] group-hover:shadow-primary/40"
               />
+              
+              {/* Subtle glass overlay for premium feel */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-transparent via-transparent to-white/5 pointer-events-none z-20" />
             </div>
           </div>
         </div>
