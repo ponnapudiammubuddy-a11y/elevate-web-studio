@@ -18,6 +18,7 @@ import AdminPages from "./pages/admin/AdminPages";
 import AdminMedia from "./pages/admin/AdminMedia";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminActivityLog from "./pages/admin/AdminActivityLog";
+import AdminUsers from "./pages/admin/AdminUsers";
 import AdminSEO from "./pages/AdminSEO";
 import { FloatingButtons } from "./components/FloatingButtons";
 import { SEOHead } from "./components/SEOHead";
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="social" element={<AdminSocialLinks />} />
             <Route path="media" element={<AdminMedia />} />
             <Route path="seo" element={<AdminSEO />} />
+            <Route path="users" element={<AdminUsers />} />
             <Route path="settings" element={<AdminSettings />} />
             <Route path="activity" element={<AdminActivityLog />} />
           </Route>

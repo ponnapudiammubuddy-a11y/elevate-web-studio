@@ -29,7 +29,8 @@ import {
   Shield,
   Clock,
   Menu,
-  ChevronLeft
+  ChevronLeft,
+  Users
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useDashboardStats } from '@/hooks/useAdmin';
@@ -41,6 +42,7 @@ const menuItems = [
   { title: 'Social Links', url: '/admin/social', icon: Share2 },
   { title: 'Media', url: '/admin/media', icon: Image },
   { title: 'SEO', url: '/admin/seo', icon: Search },
+  { title: 'Users', url: '/admin/users', icon: Users, adminOnly: true },
   { title: 'Settings', url: '/admin/settings', icon: Settings },
   { title: 'Activity Log', url: '/admin/activity', icon: Clock },
 ];
@@ -74,29 +76,35 @@ const AdminSidebar = () => {
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    onClick={() => navigate(item.url)}
-                    className={`w-full justify-start gap-3 ${
-                      isActive(item.url) ? 'bg-primary/20 text-primary' : ''
-                    }`}
-                    tooltip={collapsed ? item.title : undefined}
-                  >
-                    <item.icon className="w-5 h-5 flex-shrink-0" />
-                    {!collapsed && (
-                      <span className="flex-1 flex items-center justify-between">
-                        {item.title}
-                        {item.title === 'Inquiries' && stats?.unreadInquiries ? (
-                          <Badge variant="destructive" className="ml-2">
-                            {stats.unreadInquiries}
-                          </Badge>
-                        ) : null}
-                      </span>
-                    )}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {menuItems.map((item) => {
+                // Hide admin-only items from non-admins
+                if ('adminOnly' in item && item.adminOnly && role !== 'admin') {
+                  return null;
+                }
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      onClick={() => navigate(item.url)}
+                      className={`w-full justify-start gap-3 ${
+                        isActive(item.url) ? 'bg-primary/20 text-primary' : ''
+                      }`}
+                      tooltip={collapsed ? item.title : undefined}
+                    >
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                      {!collapsed && (
+                        <span className="flex-1 flex items-center justify-between">
+                          {item.title}
+                          {item.title === 'Inquiries' && stats?.unreadInquiries ? (
+                            <Badge variant="destructive" className="ml-2">
+                              {stats.unreadInquiries}
+                            </Badge>
+                          ) : null}
+                        </span>
+                      )}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
