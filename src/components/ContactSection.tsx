@@ -1,35 +1,35 @@
 import { useState } from 'react';
-import { Send, Mail, MessageCircle, Phone, MapPin } from 'lucide-react';
-
+import { Send, Mail, MessageCircle } from 'lucide-react';
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: '',
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
     setIsSubmitting(false);
     setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
     setTimeout(() => setIsSubmitted(false), 5000);
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
-
-  return (
-    <section id="contact" className="py-24 relative overflow-hidden">
+  return <section id="contact" className="py-24 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 gradient-bg-animated opacity-20" />
       <div className="absolute inset-0 bg-background/90" />
@@ -59,7 +59,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Email us at</p>
-                    <p className="font-semibold">hello@thahaseen.web</p>
+                    <p className="font-semibold">thahaseen.s@semixon.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
@@ -71,31 +71,12 @@ export const ContactSection = () => {
                     <p className="font-semibold">Within 24 hours</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
-                  <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Call us at</p>
-                    <p className="font-semibold">+91 98765 43210</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
-                  <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Location</p>
-                    <p className="font-semibold">Kerala, India</p>
-                  </div>
-                </div>
               </div>
             </div>
 
             {/* Contact Form */}
             <div className="gradient-border p-8 rounded-3xl">
-              {isSubmitted ? (
-                <div className="text-center py-12">
+              {isSubmitted ? <div className="text-center py-12">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center animate-scale-in">
                     <Send className="w-10 h-10 text-white" />
                   </div>
@@ -103,77 +84,38 @@ export const ContactSection = () => {
                   <p className="text-muted-foreground">
                     Thank you for reaching out. We'll get back to you soon.
                   </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                </div> : <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
                       Your Name
                     </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                      placeholder="John Doe"
-                    />
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="John Doe" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
                       Email Address
                     </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                      placeholder="john@example.com"
-                    />
+                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="john@example.com" />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
                       Your Message
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none"
-                      placeholder="Tell us about your project..."
-                    />
+                    <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={5} className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none" placeholder="Tell us about your project..." />
                   </div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full btn-gradient flex items-center justify-center gap-2 disabled:opacity-70"
-                  >
-                    {isSubmitting ? (
-                      <>
+                  <button type="submit" disabled={isSubmitting} className="w-full btn-gradient flex items-center justify-center gap-2 disabled:opacity-70">
+                    {isSubmitting ? <>
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                         Sending...
-                      </>
-                    ) : (
-                      <>
+                      </> : <>
                         Send Message
                         <Send className="w-5 h-5" />
-                      </>
-                    )}
+                      </>}
                   </button>
-                </form>
-              )}
+                </form>}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
