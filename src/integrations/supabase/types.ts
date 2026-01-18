@@ -14,7 +14,147 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      global_seo_settings: {
+        Row: {
+          business_schema: Json | null
+          created_at: string
+          default_og_image: string | null
+          google_analytics_id: string | null
+          google_search_console_verification: string | null
+          id: string
+          robots_txt_content: string | null
+          site_description: string | null
+          site_name: string | null
+          updated_at: string
+        }
+        Insert: {
+          business_schema?: Json | null
+          created_at?: string
+          default_og_image?: string | null
+          google_analytics_id?: string | null
+          google_search_console_verification?: string | null
+          id?: string
+          robots_txt_content?: string | null
+          site_description?: string | null
+          site_name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          business_schema?: Json | null
+          created_at?: string
+          default_og_image?: string | null
+          google_analytics_id?: string | null
+          google_search_console_verification?: string | null
+          id?: string
+          robots_txt_content?: string | null
+          site_description?: string | null
+          site_name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      seo_settings: {
+        Row: {
+          canonical_url: string | null
+          created_at: string
+          id: string
+          meta_description: string | null
+          meta_title: string | null
+          no_follow: boolean | null
+          no_index: boolean | null
+          og_description: string | null
+          og_image: string | null
+          og_title: string | null
+          page_name: string
+          page_slug: string
+          primary_keyword: string | null
+          schema_data: Json | null
+          schema_type: string | null
+          secondary_keywords: string[] | null
+          twitter_description: string | null
+          twitter_image: string | null
+          twitter_title: string | null
+          updated_at: string
+        }
+        Insert: {
+          canonical_url?: string | null
+          created_at?: string
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          no_follow?: boolean | null
+          no_index?: boolean | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
+          page_name: string
+          page_slug: string
+          primary_keyword?: string | null
+          schema_data?: Json | null
+          schema_type?: string | null
+          secondary_keywords?: string[] | null
+          twitter_description?: string | null
+          twitter_image?: string | null
+          twitter_title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          canonical_url?: string | null
+          created_at?: string
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          no_follow?: boolean | null
+          no_index?: boolean | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
+          page_name?: string
+          page_slug?: string
+          primary_keyword?: string | null
+          schema_data?: Json | null
+          schema_type?: string | null
+          secondary_keywords?: string[] | null
+          twitter_description?: string | null
+          twitter_image?: string | null
+          twitter_title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sitemap_entries: {
+        Row: {
+          changefreq: string | null
+          created_at: string
+          id: string
+          is_active: boolean | null
+          last_modified: string | null
+          page_type: string | null
+          priority: number | null
+          url: string
+        }
+        Insert: {
+          changefreq?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          last_modified?: string | null
+          page_type?: string | null
+          priority?: number | null
+          url: string
+        }
+        Update: {
+          changefreq?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          last_modified?: string | null
+          page_type?: string | null
+          priority?: number | null
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

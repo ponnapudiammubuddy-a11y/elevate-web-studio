@@ -9,7 +9,10 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AdminLogin from "./pages/AdminLogin";
+import AdminSEO from "./pages/AdminSEO";
 import { FloatingButtons } from "./components/FloatingButtons";
+import { SEOHead } from "./components/SEOHead";
 
 const queryClient = new QueryClient();
 
@@ -19,12 +22,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <SEOHead />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/seo" element={<AdminSEO />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
