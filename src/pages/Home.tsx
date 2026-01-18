@@ -1,6 +1,6 @@
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
-import { HighlightsSection } from '@/components/HighlightsSection';
+import { HomeAboutSection } from '@/components/HomeAboutSection';
 import { Footer } from '@/components/Footer';
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <HighlightsSection />
+      <HomeAboutSection />
       <Footer />
     </div>
   );
