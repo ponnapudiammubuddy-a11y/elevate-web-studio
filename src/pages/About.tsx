@@ -1,8 +1,5 @@
 import { Navbar } from '@/components/Navbar';
-import { AboutHeroSection } from '@/components/AboutHeroSection';
-import { AboutSection } from '@/components/AboutSection';
-import { ProcessSection } from '@/components/ProcessSection';
-import { OffersSection } from '@/components/OffersSection';
+import { AboutPageContent } from '@/components/AboutPageContent';
 import { Footer } from '@/components/Footer';
 
 const About = () => {
@@ -10,10 +7,7 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-20">
-        <AboutHeroSection />
-        <ProcessSection />
-        <AboutSection />
-        <OffersSection />
+        <AboutPageContent />
       </div>
       <Footer />
     </div>
