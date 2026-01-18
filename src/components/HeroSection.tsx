@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Code, Palette, Layers, Zap, Globe, Monitor } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const HeroSection = () => {
@@ -18,6 +18,40 @@ export const HeroSection = () => {
       
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBtLTEgMGExIDEgMCAxIDAgMiAwYTEgMSAwIDEgMCAtMiAwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+PC9nPjwvc3ZnPg==')] opacity-40" />
+
+      {/* Floating Animated Icons - Left Side */}
+      <div className="hidden lg:block absolute left-[8%] top-[20%] animate-float">
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
+          <Code className="w-7 h-7 text-white" />
+        </div>
+      </div>
+      <div className="hidden lg:block absolute left-[5%] top-[50%] animate-float animation-delay-1000">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
+          <Palette className="w-6 h-6 text-white" />
+        </div>
+      </div>
+      <div className="hidden lg:block absolute left-[12%] bottom-[25%] animate-float animation-delay-2000">
+        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center shadow-lg shadow-cyan-500/30">
+          <Layers className="w-5 h-5 text-white" />
+        </div>
+      </div>
+
+      {/* Floating Animated Icons - Right Side */}
+      <div className="hidden lg:block absolute right-[8%] top-[25%] animate-float animation-delay-600">
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
+          <Zap className="w-7 h-7 text-white" />
+        </div>
+      </div>
+      <div className="hidden lg:block absolute right-[5%] top-[55%] animate-float animation-delay-1500">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+          <Globe className="w-6 h-6 text-white" />
+        </div>
+      </div>
+      <div className="hidden lg:block absolute right-[10%] bottom-[30%] animate-float animation-delay-800">
+        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <Monitor className="w-5 h-5 text-white" />
+        </div>
+      </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
