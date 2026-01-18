@@ -1,4 +1,6 @@
 import { Sparkles, Zap, Users, MessageCircle, CheckCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import floatingMockup from '@/assets/floating-mockup.png';
 
 const features = [
   {
@@ -30,6 +32,13 @@ const stats = [
 ];
 
 export const AboutHeroSection = () => {
+  const [animateProgress, setAnimateProgress] = useState(false);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimateProgress(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden">
       {/* Background */}
@@ -89,37 +98,87 @@ export const AboutHeroSection = () => {
             </div>
           </div>
           
-          {/* Right - Stats Card */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-slate-900/80 to-slate-800/50 border border-white/10 backdrop-blur-xl">
-              {/* Gradient glow effect */}
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-primary/20 via-purple-500/20 to-cyan-500/20 blur-sm -z-10" />
+          {/* Right - Premium Floating Stats Card */}
+          <div className="relative animate-slide-fade-in" style={{ animationDelay: '0.3s' }}>
+            {/* Floating Mockup Background - Transparent Layer */}
+            <div className="absolute inset-0 -top-8 -left-8 -right-8 -bottom-8 animate-float-gentle">
+              <img 
+                src={floatingMockup} 
+                alt="" 
+                className="w-full h-full object-contain opacity-40 blur-[1px] scale-110"
+                style={{
+                  filter: 'drop-shadow(0 0 40px hsl(217 91% 60% / 0.2))',
+                  maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)'
+                }}
+              />
+            </div>
+            
+            {/* Glassmorphism Card Overlay */}
+            <div className="relative z-10 p-8 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-slate-900/60 via-slate-800/40 to-slate-900/60 border border-white/10 shadow-2xl shadow-primary/5">
+              {/* Subtle glow border effect */}
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-primary/20 via-cyan-500/20 to-purple-500/20 blur-sm -z-10 animate-glow-pulse" />
               
-              {/* Logo/Avatar */}
-              <div className="flex flex-col items-center mb-8">
-                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary via-purple-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg shadow-primary/20">
-                  <span className="text-4xl font-bold text-white">T</span>
+              {/* Logo and Text - Morph Animation */}
+              <div className="flex flex-col items-center mb-8 animate-morph-in" style={{ animationDelay: '0.5s' }}>
+                {/* Gradient Logo */}
+                <div 
+                  className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary via-purple-500 to-cyan-400 flex items-center justify-center mb-4 shadow-xl shadow-primary/30 animate-glow-pulse"
+                  style={{ animationDelay: '0.6s' }}
+                >
+                  <span className="text-4xl font-bold text-white drop-shadow-lg">T</span>
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">THAHASEEN WEB</h3>
-                <p className="text-muted-foreground">Web Design & Development</p>
+                
+                {/* Title - Scale up animation */}
+                <h3 
+                  className="text-2xl font-bold text-foreground tracking-wide opacity-0 animate-morph-in"
+                  style={{ animationDelay: '0.7s' }}
+                >
+                  THAHASEEN WEB
+                </h3>
+                
+                {/* Subtitle */}
+                <p 
+                  className="text-muted-foreground text-sm opacity-0 animate-morph-in"
+                  style={{ animationDelay: '0.8s' }}
+                >
+                  Web Design & Development
+                </p>
               </div>
               
-              {/* Stats with progress bars */}
+              {/* Progress Bars with Glow Animation */}
               <div className="space-y-5">
                 {stats.map((stat, index) => (
-                  <div key={stat.label} className="space-y-2">
+                  <div 
+                    key={stat.label} 
+                    className="space-y-2 opacity-0 animate-slide-fade-in"
+                    style={{ animationDelay: `${0.9 + index * 0.15}s` }}
+                  >
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">{stat.label}</span>
-                      <span className="text-sm font-semibold text-cyan-400">{stat.value}%</span>
+                      <span className="text-sm text-muted-foreground font-medium">{stat.label}</span>
+                      <span className="text-sm font-bold bg-gradient-to-r from-cyan-400 to-primary bg-clip-text text-transparent">
+                        {stat.value}%
+                      </span>
                     </div>
-                    <div className="h-2 rounded-full bg-slate-700/50 overflow-hidden">
+                    <div className="h-2.5 rounded-full bg-slate-700/50 overflow-hidden backdrop-blur-sm">
                       <div 
-                        className="h-full rounded-full bg-gradient-to-r from-primary via-purple-500 to-cyan-500 transition-all duration-1000 ease-out"
+                        className="h-full rounded-full bg-gradient-to-r from-primary via-cyan-500 to-cyan-400 relative animate-progress-fill"
                         style={{ 
-                          width: `${stat.value}%`,
-                          animationDelay: `${0.5 + index * 0.2}s`
+                          width: animateProgress ? `${stat.value}%` : '0%',
+                          transition: 'width 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                          transitionDelay: `${1.0 + index * 0.2}s`
                         }}
-                      />
+                      >
+                        {/* Glow effect on progress bar */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/30 to-primary/0 animate-gradient-x" />
+                        <div 
+                          className="absolute -right-1 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50"
+                          style={{ 
+                            opacity: animateProgress ? 1 : 0,
+                            transition: 'opacity 0.3s ease',
+                            transitionDelay: `${1.5 + index * 0.2}s`
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
