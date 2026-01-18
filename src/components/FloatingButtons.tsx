@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { ArrowUp } from 'lucide-react';
 
-export const FloatingButtons = () => {
+export const FloatingButtons = forwardRef<HTMLDivElement>((_, ref) => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const FloatingButtons = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <div ref={ref} className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
@@ -44,4 +44,6 @@ export const FloatingButtons = () => {
       </a>
     </div>
   );
-};
+});
+
+FloatingButtons.displayName = 'FloatingButtons';
