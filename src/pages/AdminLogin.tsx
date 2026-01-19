@@ -54,16 +54,17 @@ const AdminLogin = () => {
       
       <Card className="w-full max-w-md glass-card relative z-10">
         <CardHeader className="text-center">
-          <div className="w-16 h-16 rounded-2xl gradient-bg mx-auto mb-4 flex items-center justify-center">
-            <Lock className="w-8 h-8 text-white" />
+          {/* Thahaseen Web Logo */}
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-blue-600 mx-auto mb-4 flex items-center justify-center shadow-lg shadow-purple-500/30">
+            <span className="text-white font-bold text-3xl font-display">T</span>
           </div>
           <CardTitle className="text-2xl font-bold">
-            {isSignUp ? 'Create Admin Account' : 'Admin Login'}
+            {isSignUp ? 'Create Admin Account' : 'Thahaseen Web Admin'}
           </CardTitle>
           <CardDescription>
             {isSignUp 
-              ? 'Create an account to manage SEO settings' 
-              : 'Sign in to access the SEO admin panel'}
+              ? 'Create an account to manage your website' 
+              : 'Sign in to access the admin panel'}
           </CardDescription>
         </CardHeader>
         

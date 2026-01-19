@@ -60,12 +60,13 @@ const AdminSidebar = () => {
   return (
     <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
       <div className="p-4 border-b border-border flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center flex-shrink-0">
-          <Shield className="w-5 h-5 text-white" />
+        {/* Thahaseen Web Logo */}
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-purple-600 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/30">
+          <span className="text-white font-bold text-xl font-display">T</span>
         </div>
         {!collapsed && (
-          <div>
-            <h1 className="font-bold text-lg">Admin Panel</h1>
+          <div className="min-w-0">
+            <h1 className="font-bold text-base truncate">Thahaseen Web</h1>
             <Badge variant="outline" className="text-xs capitalize">{role || 'loading...'}</Badge>
           </div>
         )}
