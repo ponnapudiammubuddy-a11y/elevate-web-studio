@@ -42,7 +42,42 @@
   <meta name="geo.placename" content="India" />
   <meta name="theme-color" content="#8B5CF6" />
 
-  <!-- Structured Data -->
+  <!-- Structured Data - Person -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Thahaseen Web",
+      "url": "https://www.thahaseenweb.site",
+      "jobTitle": "Web Developer",
+      "description": "Professional freelance web developer specializing in website design, website development, landing pages, business websites, and portfolio websites.",
+      "knowsAbout": ["Website Design", "Website Development", "Landing Page Design", "Portfolio Website", "Business Website", "Vercel Deployment"],
+      "sameAs": []
+    }
+  </script>
+
+  <!-- Structured Data - WebSite -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Thahaseen Web",
+      "url": "https://www.thahaseenweb.site",
+      "description": "Professional freelance web developer offering custom website design, website development, and landing page design services in India.",
+      "publisher": {
+        "@type": "Person",
+        "name": "Thahaseen Web",
+        "jobTitle": "Web Developer"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.thahaseenweb.site/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
+  <!-- Structured Data - ProfessionalService -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
