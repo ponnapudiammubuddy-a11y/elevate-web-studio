@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Send, Mail, MessageCircle, Phone } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { trackFormSubmission, trackFormStart } from '@/lib/analytics';
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasStartedForm, setHasStartedForm] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +49,12 @@ export const ContactSection = () => {
       }
 
       setIsSubmitted(true);
+      
+      // Track successful form submission
+      trackFormSubmission('contact_form', 'contact_section');
+      
       setFormData({ name: '', email: '', phone: '', message: '' });
+      setHasStartedForm(false);
       toast.success('Message sent successfully!');
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
@@ -59,9 +66,17 @@ export const ContactSection = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
+    // Track form start when user begins typing
+    if (!hasStartedForm && value.length > 0) {
+      setHasStartedForm(true);
+      trackFormStart('contact_form', 'contact_section');
+    }
+    
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
   };
 
