@@ -22,35 +22,35 @@ export const HeroSection = () => {
 
       {/* Floating Animated Icons - Left Side */}
       <div className="hidden lg:block absolute left-[8%] top-[20%] animate-float">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
-          <Code className="w-7 h-7 text-white" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md shadow-blue-500/30">
+          <Code className="w-5 h-5 text-white" />
         </div>
       </div>
       <div className="hidden lg:block absolute left-[5%] top-[50%] animate-float animation-delay-1000">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
-          <Palette className="w-6 h-6 text-white" />
+        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-md shadow-purple-500/30">
+          <Palette className="w-4 h-4 text-white" />
         </div>
       </div>
       <div className="hidden lg:block absolute left-[12%] bottom-[25%] animate-float animation-delay-2000">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center shadow-lg shadow-cyan-500/30">
-          <Layers className="w-5 h-5 text-white" />
+        <div className="w-8 h-8 rounded-md bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center shadow-md shadow-cyan-500/30">
+          <Layers className="w-4 h-4 text-white" />
         </div>
       </div>
 
       {/* Floating Animated Icons - Right Side */}
       <div className="hidden lg:block absolute right-[8%] top-[25%] animate-float animation-delay-600">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
-          <Zap className="w-7 h-7 text-white" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-md shadow-orange-500/30">
+          <Zap className="w-5 h-5 text-white" />
         </div>
       </div>
       <div className="hidden lg:block absolute right-[5%] top-[55%] animate-float animation-delay-1500">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
-          <Globe className="w-6 h-6 text-white" />
+        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+          <Globe className="w-4 h-4 text-white" />
         </div>
       </div>
       <div className="hidden lg:block absolute right-[10%] bottom-[30%] animate-float animation-delay-800">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-          <Monitor className="w-5 h-5 text-white" />
+        <div className="w-8 h-8 rounded-md bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center shadow-md shadow-indigo-500/30">
+          <Monitor className="w-4 h-4 text-white" />
         </div>
       </div>
 
@@ -59,19 +59,19 @@ export const HeroSection = () => {
           {/* Badge */}
           
           {/* Main Heading */}
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up animation-delay-200">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5 animate-fade-in-up animation-delay-200">
             Professional{' '}
             <span className="gradient-text">Web Developer</span>{' '}
             Building Websites That Grow Your Business
           </h1>
 
           {/* Sub-text */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed animate-fade-in-up animation-delay-400">
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-3 leading-relaxed animate-fade-in-up animation-delay-400">
             I specialize in website design and development, creating custom solutions that convert visitors into customers. 
             From landing pages and business websites to portfolio websites, every project is crafted with precision and purpose.
           </p>
           
-          <p className="text-base md:text-lg text-muted-foreground/80 max-w-xl mx-auto mb-10 animate-fade-in-up animation-delay-500">
+          <p className="text-sm md:text-base text-muted-foreground/80 max-w-lg mx-auto mb-8 animate-fade-in-up animation-delay-500">
             Based in India, delivering modern, responsive websites with clean code and stunning designs.
           </p>
 
@@ -95,18 +95,18 @@ export const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-border/30 max-w-2xl mx-auto animate-fade-in-up animation-delay-1000">
+          <div className="grid grid-cols-3 gap-6 mt-10 pt-6 border-t border-border/30 max-w-xl mx-auto animate-fade-in-up animation-delay-1000">
             <div className="text-center">
-              <div className="font-display text-3xl md:text-4xl font-bold gradient-text">50+</div>
-              <div className="text-sm text-muted-foreground mt-1">Projects Completed</div>
+              <div className="font-display text-2xl md:text-3xl font-bold gradient-text">50+</div>
+              <div className="text-xs text-muted-foreground mt-1">Projects Completed</div>
             </div>
             <div className="text-center">
-              <div className="font-display text-3xl md:text-4xl font-bold gradient-text">100%</div>
-              <div className="text-sm text-muted-foreground mt-1">Client Satisfaction</div>
+              <div className="font-display text-2xl md:text-3xl font-bold gradient-text">100%</div>
+              <div className="text-xs text-muted-foreground mt-1">Client Satisfaction</div>
             </div>
             <div className="text-center">
-              <div className="font-display text-3xl md:text-4xl font-bold gradient-text">15+</div>
-              <div className="text-sm text-muted-foreground mt-1">Technologies Used</div>
+              <div className="font-display text-2xl md:text-3xl font-bold gradient-text">15+</div>
+              <div className="text-xs text-muted-foreground mt-1">Technologies Used</div>
             </div>
           </div>
         </div>
