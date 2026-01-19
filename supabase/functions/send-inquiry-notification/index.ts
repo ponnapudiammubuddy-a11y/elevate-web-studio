@@ -30,7 +30,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification to admin
     const adminEmailResponse = await resend.emails.send({
-      from: "AquaHue Web <onboarding@resend.dev>",
+      from: "Thahaseen Web <onboarding@resend.dev>",
       to: [adminEmail],
       subject: `New Contact Inquiry from ${name}`,
       html: `
@@ -75,7 +75,7 @@ const handler = async (req: Request): Promise<Response> => {
                 </div>
               </div>
               <div class="footer">
-                <p>This email was sent from AquaHue Web contact form</p>
+                <p>This email was sent from Thahaseen Web contact form</p>
               </div>
             </div>
           </body>
@@ -87,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation to the user
     const userEmailResponse = await resend.emails.send({
-      from: "AquaHue Web <onboarding@resend.dev>",
+      from: "Thahaseen Web <onboarding@resend.dev>",
       to: [email],
       subject: "We received your message!",
       html: `
@@ -115,10 +115,10 @@ const handler = async (req: Request): Promise<Response> => {
                 <blockquote style="padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #6366f1; margin: 20px 0;">
                   ${message.replace(/\n/g, '<br>')}
                 </blockquote>
-                <p>Best regards,<br><strong>The AquaHue Web Team</strong></p>
+                <p>Best regards,<br><strong>The Thahaseen Web Team</strong></p>
               </div>
               <div class="footer">
-                <p>© AquaHue Web - Professional Web Design</p>
+                <p>© Thahaseen Web - Professional Web Design</p>
               </div>
             </div>
           </body>
