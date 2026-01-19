@@ -97,7 +97,7 @@ export const HeroSection = () => {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6 mt-10 pt-6 border-t border-border/30 max-w-xl mx-auto animate-fade-in-up animation-delay-1000">
             <div className="text-center">
-              <div className="font-display text-2xl md:text-3xl font-bold gradient-text">50+</div>
+              <div className="font-display text-2xl md:text-3xl font-bold gradient-text">10+</div>
               <div className="text-xs text-muted-foreground mt-1">Projects Completed</div>
             </div>
             <div className="text-center">
