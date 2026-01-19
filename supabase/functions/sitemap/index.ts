@@ -36,7 +36,7 @@ Deno.serve(async (req) => {
       throw error;
     }
 
-    const baseUrl = 'https://aqua-hue-web.lovable.app';
+    const baseUrl = 'https://www.thahaseenweb.site';
     
     const urlEntries = (entries as SitemapEntry[]).map(entry => `
   <url>
@@ -62,7 +62,7 @@ ${urlEntries}
       `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://aqua-hue-web.lovable.app/</loc>
+    <loc>https://www.thahaseenweb.site/</loc>
     <priority>1.0</priority>
   </url>
 </urlset>`,

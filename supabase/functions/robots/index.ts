@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
     const robotsContent = data?.robots_txt_content || `User-agent: *
 Allow: /
 
-Sitemap: https://aqua-hue-web.lovable.app/sitemap.xml`;
+Sitemap: https://www.thahaseenweb.site/sitemap.xml`;
 
     console.log('Robots.txt served successfully');
 
@@ -45,7 +45,7 @@ Sitemap: https://aqua-hue-web.lovable.app/sitemap.xml`;
       `User-agent: *
 Allow: /
 
-Sitemap: https://aqua-hue-web.lovable.app/sitemap.xml`,
+Sitemap: https://www.thahaseenweb.site/sitemap.xml`,
       { headers: corsHeaders }
     );
   }
