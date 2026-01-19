@@ -60,16 +60,19 @@ export const HeroSection = () => {
           
           {/* Main Heading */}
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up animation-delay-200">
-            Premium Web Design &{' '}
-            <span className="gradient-text">Development</span>{' '}
-            That Elevates Your Business
+            Professional{' '}
+            <span className="gradient-text">Web Developer</span>{' '}
+            Building Websites That Grow Your Business
           </h1>
 
           {/* Sub-text */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up animation-delay-400">
-            I design, redesign, and develop professional websites tailored exactly to client needs. 
-            I clearly understand requirements, solve every doubt, and deliver modern, high-quality 
-            websites that build trust and real business results.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed animate-fade-in-up animation-delay-400">
+            I specialize in website design and development, creating custom solutions that convert visitors into customers. 
+            From landing pages and business websites to portfolio websites, every project is crafted with precision and purpose.
+          </p>
+          
+          <p className="text-base md:text-lg text-muted-foreground/80 max-w-xl mx-auto mb-10 animate-fade-in-up animation-delay-500">
+            Based in India, delivering modern, responsive websites with clean code and stunning designs.
           </p>
 
           {/* CTA Buttons */}
