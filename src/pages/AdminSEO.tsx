@@ -307,7 +307,7 @@ const AdminSEO = () => {
                           {(editedSettings.meta_title as string) || 'Page Title'}
                         </p>
                         <p className="text-[#006621] text-sm">
-                          thahaseen-web.lovable.app{selectedPageData.page_slug}
+                          www.thahaseenweb.site{selectedPageData.page_slug}
                         </p>
                         <p className="text-[#545454] text-sm line-clamp-2">
                           {(editedSettings.meta_description as string) || 'Add a meta description to see how it appears in search results.'}
@@ -427,7 +427,7 @@ const AdminSEO = () => {
                 <div className="p-4 rounded-lg bg-muted/30">
                   <p className="text-sm text-muted-foreground mb-2">
                     Sitemap URL: <code className="px-2 py-1 bg-background rounded">
-                      https://thahaseen-web.lovable.app/sitemap.xml
+                      https://www.thahaseenweb.site/sitemap.xml
                     </code>
                   </p>
                   <p className="text-sm text-muted-foreground">
