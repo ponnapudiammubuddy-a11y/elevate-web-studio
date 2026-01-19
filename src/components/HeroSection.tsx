@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles, Code, Palette, Layers, Zap, Globe, Monitor } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackCTAClick } from '@/lib/analytics';
 
 export const HeroSection = () => {
   return (
@@ -76,6 +77,7 @@ export const HeroSection = () => {
             <Link
               to="/portfolio"
               className="btn-gradient flex items-center gap-2 group"
+              onClick={() => trackCTAClick('view_my_work', 'hero_section', '/portfolio')}
             >
               View My Work
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -83,6 +85,7 @@ export const HeroSection = () => {
             <Link
               to="/contact"
               className="btn-outline-gradient flex items-center gap-2"
+              onClick={() => trackCTAClick('get_your_website', 'hero_section', '/contact')}
             >
               Get Your Website
             </Link>

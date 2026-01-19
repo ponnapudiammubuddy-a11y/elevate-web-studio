@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Sparkles, Send, CheckCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { trackModalOpen, trackModalClose, trackFormSubmission, trackFormStart } from '@/lib/analytics';
 
 interface GetStartedModalProps {
   isOpen: boolean;
@@ -36,7 +37,29 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
     service: '',
   });
   const [ripple, setRipple] = useState<{ x: number; y: number } | null>(null);
+  const [hasStartedForm, setHasStartedForm] = useState(false);
   const { toast } = useToast();
+
+  // Track modal open/close
+  useEffect(() => {
+    if (isOpen) {
+      trackModalOpen('get_started_modal');
+    }
+  }, [isOpen]);
+
+  const handleClose = () => {
+    trackModalClose('get_started_modal');
+    onClose();
+  };
+
+  // Track form start when user begins typing
+  const handleInputChange = (field: string, value: string) => {
+    if (!hasStartedForm && value.length > 0) {
+      setHasStartedForm(true);
+      trackFormStart('get_started_form', 'get_started_modal');
+    }
+    setFormData({ ...formData, [field]: value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,15 +75,22 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
       if (error) throw error;
 
       setIsSuccess(true);
+      
+      // Track successful form submission
+      trackFormSubmission('get_started_form', 'get_started_modal', {
+        service_selected: formData.service,
+      });
+      
       toast({
         title: 'Request Submitted!',
         description: "We'll get back to you within 24 hours.",
       });
 
       setTimeout(() => {
-        onClose();
+        handleClose();
         setIsSuccess(false);
         setFormData({ name: '', email: '', service: '' });
+        setHasStartedForm(false);
       }, 2000);
     } catch (error) {
       toast({
@@ -87,7 +117,7 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      onClick={onClose}
+      onClick={handleClose}
     >
       {/* Backdrop with blur */}
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-[fade-in_0.3s_ease-out]" />
@@ -112,7 +142,7 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
         <div className="relative glass-card rounded-2xl p-8 md:p-10 glow overflow-hidden">
           {/* Close Button */}
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 p-2 rounded-full glass-card hover:bg-muted/50 transition-all duration-300 hover:scale-110 group"
           >
             <X className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
@@ -155,7 +185,7 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                   placeholder="John Doe"
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
                   className="h-12 bg-muted/50 border-border/50 focus:border-primary focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
@@ -170,7 +200,7 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                   placeholder="john@example.com"
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
                   className="h-12 bg-muted/50 border-border/50 focus:border-primary focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
@@ -181,7 +211,7 @@ export const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                 </Label>
                 <Select
                   value={formData.service}
-                  onValueChange={(value) => setFormData({ ...formData, service: value })}
+                  onValueChange={(value) => handleInputChange('service', value)}
                   required
                 >
                   <SelectTrigger className="h-12 bg-muted/50 border-border/50 focus:border-primary focus:ring-primary/20 transition-all duration-300">

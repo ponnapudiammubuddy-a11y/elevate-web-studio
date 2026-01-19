@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { GetStartedModal } from './GetStartedModal';
+import { trackButtonClick, trackNavigation } from '@/lib/analytics';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -68,6 +69,7 @@ export const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={() => trackNavigation(item.name, item.href)}
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 relative ${
                   location.pathname === item.href
                     ? 'text-primary nav-link-active'
@@ -81,7 +83,10 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              trackButtonClick('get_started', 'navbar_desktop');
+              setIsModalOpen(true);
+            }}
             className="hidden lg:block btn-gradient text-sm py-2.5 px-6 hover:scale-105 active:scale-95 transition-transform duration-200"
           >
             Get Started
@@ -107,6 +112,7 @@ export const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={() => trackNavigation(item.name, item.href)}
                 className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
                   location.pathname === item.href
                     ? 'text-primary bg-primary/10'
@@ -118,6 +124,7 @@ export const Navbar = () => {
             ))}
             <button
               onClick={() => {
+                trackButtonClick('get_started', 'navbar_mobile');
                 setIsMobileMenuOpen(false);
                 setIsModalOpen(true);
               }}
