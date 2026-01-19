@@ -113,7 +113,9 @@ export const useSEO = (pageSlug: string) => {
       updateMetaTag('og:title', seoSettings?.og_title || seoSettings?.meta_title, true);
       updateMetaTag('og:description', seoSettings?.og_description || seoSettings?.meta_description, true);
       updateMetaTag('og:image', seoSettings?.og_image || globalSettings?.default_og_image, true);
+      updateMetaTag('og:url', seoSettings?.canonical_url, true);
       updateMetaTag('og:type', 'website', true);
+      updateMetaTag('og:site_name', globalSettings?.site_name || 'Thahaseen Web', true);
 
       // Twitter Card tags
       updateMetaTag('twitter:card', 'summary_large_image');
