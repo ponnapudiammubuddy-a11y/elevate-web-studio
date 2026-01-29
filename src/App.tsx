@@ -22,6 +22,7 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminSEO from "./pages/AdminSEO";
 import { FloatingButtons } from "./components/FloatingButtons";
 import { SEOHead } from "./components/SEOHead";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <SEOHead />
         <Routes>
           {/* Public Routes */}
