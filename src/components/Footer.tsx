@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 export const Footer = forwardRef<HTMLElement>((_, ref) => {
   const currentYear = new Date().getFullYear();
@@ -40,13 +41,12 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-5 group">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 flex items-center justify-center font-display font-bold text-white text-xl group-hover:scale-110 transition-transform duration-300">
-                T
-              </div>
-              <span className="font-display font-bold text-2xl">
-                THAHASEEN<span className="gradient-text"> WEB</span>
-              </span>
+            <Link to="/" className="flex items-center mb-5 group">
+              <img 
+                src={logo} 
+                alt="Thahaseen Web - Web Design and Development" 
+                className="h-12 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Premium web design & development solutions that elevate your business. 
