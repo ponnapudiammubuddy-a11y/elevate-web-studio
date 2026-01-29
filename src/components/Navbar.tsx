@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { GetStartedModal } from './GetStartedModal';
 import { trackButtonClick, trackNavigation } from '@/lib/analytics';
+import logo from '@/assets/logo.png';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -54,13 +55,12 @@ export const Navbar = () => {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center font-display font-bold text-white text-lg">
-              T
-            </div>
-            <span className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors">
-              THAHASEEN<span className="gradient-text"> WEB</span>
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={logo} 
+              alt="Thahaseen Web - Web Design and Development" 
+              className="h-10 md:h-12 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}
