@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import adminLogo from '@/assets/admin-logo.png';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useUserRole } from '@/hooks/useAdmin';
@@ -61,9 +62,11 @@ const AdminSidebar = () => {
     <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
       <div className="p-4 border-b border-border flex items-center gap-3">
         {/* Thahaseen Web Logo */}
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-purple-600 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/30">
-          <span className="text-white font-bold text-xl font-display">T</span>
-        </div>
+        <img 
+          src={adminLogo} 
+          alt="Thahaseen Web" 
+          className="w-10 h-10 object-contain flex-shrink-0"
+        />
         {!collapsed && (
           <div className="min-w-0">
             <h1 className="font-bold text-base truncate">Thahaseen Web</h1>
